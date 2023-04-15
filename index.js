@@ -8,7 +8,6 @@ const express = require('express')
 const app = express()
 
 
-// Color Page
 app.get('/', function (request, response) {
     
     request.send(`
@@ -21,6 +20,14 @@ app.get('/', function (request, response) {
     `)
 })
 
+app.use('/places', require('./controllers/places'))
+
+
+app.get('*', (req, res) => {
+    res.status(404).send('<h1>404 Page</h1>')
+})
+
 // Listen to a port number defined by a local environment variable.
 app.listen(process.env.PORT)
+
 
